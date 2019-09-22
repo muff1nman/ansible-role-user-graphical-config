@@ -1,0 +1,6 @@
+---
+xkb_variant: "hhk"
+terminal_emulator: "mate-terminal"
+bg_zoom: 100
+variant: "hhk"
+passmenu_bin: "passmenu"
