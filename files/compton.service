@@ -1,0 +1,10 @@
+[Unit]
+Description=Compton Daemon
+PartOf=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/compton --backend glx --vsync opengl-swc -C -f -D 5
+Restart=always
+
+[Install]
+WantedBy=xmonad.target

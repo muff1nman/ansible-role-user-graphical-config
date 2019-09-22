@@ -1,0 +1,29 @@
+---
+- name: Create plasma env folder
+  file:
+    state: directory
+    path: "{{ desktop_user_vars.dir }}/.config/plasma-workspace/env"
+    recurse: yes
+- name: Set i3 wm
+  copy:
+    content: "export KDEWM=/usr/bin/i3"
+    dest: "{{ desktop_user_vars.dir }}/.config/plasma-workspace/env/set_window_manager.sh"
+    mode: 0755
+- name: Remove xinitrc
+  file:
+    state: absent
+    path: "{{ desktop_user_vars.dir }}/.xinitrc"
+- name: Remove xprofile
+  file: 
+    state: absent
+    path: "{{ desktop_user_vars.dir }}/.xprofile"
+
+- name: Create i3 config directory
+  file:
+    state: directory
+    path: "{{ desktop_user_vars.dir }}/.config/i3"
+    recurse: yes
+- name: Copy i3 config
+  copy:
+    src: i3/config
+    dest: "{{ desktop_user_vars.dir }}/.config/i3/config"

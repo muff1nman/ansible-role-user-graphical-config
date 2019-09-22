@@ -1,0 +1,9 @@
+---
+- name: Ensure fonts directory is present
+  file:
+    state: directory
+    path: "{{ desktop_user_vars.dir }}/.fonts"
+- name: Sync fonts
+  copy:
+    src: fonts/
+    dest: "{{ desktop_user_vars.dir }}/.fonts/"

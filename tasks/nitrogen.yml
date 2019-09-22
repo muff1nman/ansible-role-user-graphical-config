@@ -1,0 +1,25 @@
+---
+- name: Create nitogren config folder
+  file:
+    state: directory
+    path: "{{ desktop_user_vars.dir }}/.config/nitrogen"
+    recurse: yes
+- name: Configure nitogren
+  template:
+    src: nitrogen/bg-saved.cfg
+    dest: "{{ desktop_user_vars.dir }}/.config/nitrogen/bg-saved.cfg"
+- include_tasks: systemd-user.yml
+- name: Setup nitrogen user service
+  copy:
+    src: nitrogen/nitrogen.service
+    dest: "{{ desktop_user_vars.dir }}/.config/systemd/user/nitrogen.service"
+  notify: [ 'systemd user' ]
+- meta: flush_handlers
+- name: Enable and start nitrogen
+  service:
+    name: nitrogen
+    state: started
+    enabled: yes
+    user: yes
+  environment:
+    DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/{{ desktop_user_vars.uid }}/bus"

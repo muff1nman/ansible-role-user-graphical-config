@@ -1,0 +1,11 @@
+---
+- name: Setup xinitrc
+  template:
+    src: xinitrc.j2
+    dest: "{{ desktop_user_vars.dir }}/.xinitrc"
+    backup: yes
+- name: Setup xprofile
+  template: 
+    src: xprofile.j2
+    dest: "{{ desktop_user_vars.dir }}/.xprofile"
+    backup: yes

@@ -1,0 +1,16 @@
+---
+- include_tasks: systemd-user.yml
+- name: Setup compton user service
+  copy:
+    src: compton.service
+    dest: "{{ desktop_user_vars.dir }}/.config/systemd/user/compton.service"
+  notify: [ 'systemd user' ]
+- meta: flush_handlers
+- name: Enable and start compton
+  service:
+    name: compton
+    state: started
+    enabled: yes
+    user: yes
+  environment:
+    DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/{{ desktop_user_vars.uid }}/bus"

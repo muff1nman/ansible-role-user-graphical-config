@@ -1,0 +1,8 @@
+---
+# This is now done from xmonad startup hooks
+- name: Setup light locker user service
+  file:
+    path: "{{ desktop_user_vars.dir }}/.config/systemd/user/light-locker.service"
+    state: absent
+  notify: [ 'systemd user' ]
+- meta: flush_handlers

@@ -1,0 +1,6 @@
+---
+- name: Setup xresources
+  copy:
+    content: |
+      Xft.dpi: 180
+    dest: "{{desktop_user_vars.dir}}/.Xresources"

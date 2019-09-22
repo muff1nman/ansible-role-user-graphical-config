@@ -1,0 +1,56 @@
+---
+- set_fact: passmenu_bin=/usr/bin/passmenu
+  when: "ansible_distribution == 'Fedora' and (ansible_distribution_major_version | int) >= 26"
+- set_fact: passmenu_bin=/usr/share/doc/pass/contrib/dmenu/passmenu
+  when: "ansible_distribution == 'Fedora' and (ansible_distribution_major_version | int) < 26"
+
+- name: Check that both matexmonad and xmonad arent set
+  fail:
+    msg: 'These desktop_wm options are incompatible'
+  when: '"matexmonad" in desktop_wm_list and "xmonad" in desktop_wm_list'
+- name: Create xmonad conf directory
+  file:
+    path: "{{desktop_user_vars.dir}}/.xmonad/lib"
+    state: directory
+- name: Configure mate xmonad
+  template:
+    src: xmonad-mate.hs.j2
+    dest: "{{desktop_user_vars.dir}}/.xmonad/xmonad.hs"
+  register: xmonad_config
+  when: '"matexmonad" in desktop_wm_list'
+- name: Configure vanilla xmonad
+  template:
+    src: xmonad-vanilla.hs.j2
+    dest: "{{desktop_user_vars.dir}}/.xmonad/xmonad.hs"
+  register: xmonad_config
+  when: '"xmonad" in desktop_wm_list'
+- name: Configure xmonad lib
+  copy:
+    src: xmonad/lib/MateConfig.hs
+    dest: "{{desktop_user_vars.dir}}/.xmonad/lib/MateConfig.hs"
+  register: xmonad_lib
+  when: '"matexmonad" in desktop_wm_list'
+- name: Recompile xmonad
+  command: xmonad --recompile
+  when: xmonad_config.changed or xmonad_lib.changed
+- name: Notify xmonad restart needed
+  debug:
+    msg: "Xmonad must be restarted using xmonad --restart"
+  when: xmonad_config.changed or xmonad_lib.changed
+- include_tasks: systemd-user.yml
+- name: Configure xmonad target
+  copy:
+    src: xmonad/xmonad.target
+    dest: "{{desktop_user_vars.dir}}/.config/systemd/user/xmonad.target"
+  when: '"xmonad" in desktop_wm_list'
+- name: Remove xinitrc
+  file:
+    state: absent
+    path: "{{ desktop_user_vars.dir }}/.xinitrc"
+  when: '"xmonad" in desktop_wm_list'
+- name: Remove xprofile
+  file: 
+    state: absent
+    path: "{{ desktop_user_vars.dir }}/.xprofile"
+  when: '"xmonad" in desktop_wm_list'
+

@@ -1,0 +1,9 @@
+---
+- name: Create DesktopImages directory
+  file:
+    path: "{{ desktop_user_vars.dir }}/DesktopImages"
+    state: directory
+- name: Copy mountain.jpg
+  copy:
+    src: DesktopImages/mountain.jpg
+    dest: "{{ desktop_user_vars.dir }}/DesktopImages/mountain.jpg"

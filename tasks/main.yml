@@ -1,0 +1,35 @@
+---
+- name: Setting up User Variables
+  discover_user_vars:
+    user: "{{ ansible_env.USER }}"
+  check_mode: no
+  register: desktop_user_vars
+- include_tasks: light-locker.yml
+  when: '"xmonad" in desktop_wm_list'
+- include_tasks: xmonad-conf.yml
+  when: '"xmonad" in desktop_wm_list or "matexmonad" in desktop_wm_list'
+- include_tasks: desktop-images.yml
+- include_tasks: nitrogen.yml
+  when: '"xmonad" in desktop_wm_list'
+- include_tasks: hidpi.yml
+  when:
+    - '"xmonad" in desktop_wm_list or "matexmonad" in desktop_wm_list'
+    - hi_dpi is defined and hi_dpi
+  # TODO use something other than compton?
+- include_tasks: compton.yml
+  when: '"xmonad" in desktop_wm_list'
+- include_tasks: xinitrc.yml
+  when: '"matexmonad" in desktop_wm_list'
+- include_tasks: kdei3.yml
+  when: '"kdei3" in desktop_wm_list'
+- include_tasks: desktop-entries.yml
+- name: Create .config/dunst dir
+  file:
+    state: directory
+    path: "{{desktop_user_vars.dir}}/.config/dunst"
+- name: Configure dunstrc
+  copy:
+    src: dunst/dunstrc
+    dest: "{{desktop_user_vars.dir}}/.config/dunst/dunstrc"
+- include_tasks: dconf-settings.yml
+- include_Tasks: fonts.yml

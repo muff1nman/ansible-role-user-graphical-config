@@ -1,0 +1,10 @@
+[Unit]
+Description=Nitrogen
+PartOf=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/nitrogen --restore
+
+[Install]
+WantedBy=xmonad.target
