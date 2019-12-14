@@ -1,5 +1,5 @@
 ---
-- name: Set dconf non quoted value
+- name: Set dconf value
   dconf:
     key: "{{ item.key }}"
     value: "{{ item.value }}"
@@ -8,47 +8,39 @@
     - { key: '/org/mate/caja/desktop/home-icon-visible', value: 'false' }
     - { key: '/org/mate/caja/desktop/trash-icon-visible', value: 'false' }
     - { key: '/org/mate/caja/desktop/volumes-visible', value: 'false' }
+    - { key: '/org/mate/desktop/applications/terminal/exec', value: "'mate-terminal'" }
+    - { key: '/org/mate/desktop/background/color-shading-type', value: "'vertical-gradient'" }
+    - { key: '/org/mate/desktop/background/picture-filename', value: "'{{ desktop_user_vars.dir }}/DesktopImages/mountain.jpg'" }
+    - { key: '/org/mate/desktop/background/picture-options', value: "'zoom'" }
+    - { key: '/org/mate/desktop/background/primary-color', value: "'#58589191bcbc'" }
+    - { key: '/org/mate/desktop/background/secondary-color', value: "'#3c3c8f8f2525'" }
+    - { key: '/org/mate/desktop/interface/gtk-theme', value: "'Adwaita'" }
+    - { key: '/org/mate/desktop/interface/icon-theme', value: "'Adwaita'" }
     - { key: '/org/mate/desktop/peripherals/mouse/cursor-size', value: '24' }
+    - { key: '/org/mate/desktop/peripherals/mouse/cursor-theme', value: "'Adwaita'" }
     - { key: '/org/mate/desktop/peripherals/touchpad/disable-while-typing', value: 'true' }
     - { key: '/org/mate/desktop/peripherals/touchpad/horiz-scroll-enabled', value: 'true' }
     - { key: '/org/mate/desktop/peripherals/touchpad/scroll-method', value: '2' }
-    - { key: '/org/mate/terminal/profiles/default/default-show-menubar', value: 'false' }
-    - { key: '/org/mate/terminal/profiles/default/silent-bell', value: 'true' }
-    - { key: '/org/mate/terminal/profiles/default/use-system-font', value: 'false' }
-    - { key: '/org/mate/terminal/profiles/default/background-darkness', value: '0.90899470899470902' }
-    - key: '/org/mate/terminal/global/profile-list'
-      value: "['default']"
-    - { key: '/org/mate/panel/toplevels/top/background/opacity', value: '65535' }
-    - { key: '/org/mate/power-manager/sleep-display-ac', value: '300' }
+    - { key: '/org/mate/desktop/session/required-components/filemanager', value: "''" }
     - key: '/org/mate/desktop/session/required-components-list'
       value: "['windowmanager', 'panel']"
-
-- name: Set dconf quoted value
-  dconf:
-    key: "{{ item.key }}"
-    value: "{{ item.value }}"
-    quote: yes
-  with_items:
-    - { key: '/org/mate/desktop/applications/terminal/exec', value: 'mate-terminal' }
-    - { key: '/org/mate/desktop/background/color-shading-type', value: 'vertical-gradient' }
-    - { key: '/org/mate/desktop/background/picture-filename', value: "{{ desktop_user_vars.dir }}/DesktopImages/mountain.jpg" }
-    - { key: '/org/mate/desktop/background/picture-options', value: 'zoom' }
-    - { key: '/org/mate/desktop/background/primary-color', value: '#58589191bcbc' }
-    - { key: '/org/mate/desktop/background/secondary-color', value: '#3c3c8f8f2525' }
-    - { key: '/org/mate/desktop/interface/gtk-theme', value: 'Adwaita' }
-    - { key: '/org/mate/desktop/interface/icon-theme', value: 'Adwaita' }
-    - { key: '/org/mate/desktop/peripherals/mouse/cursor-theme', value: 'Adwaita' }
-    - { key: '/org/mate/desktop/session/required-components/filemanager', value: '' }
-    - { key: '/org/mate/desktop/session/required-components/windowmanager', value: 'xmonad' }
-    - { key: '/org/mate/marco/general/theme', value: 'Adwaita' }
-    - { key: '/org/mate/panel/toplevels/top/background/color', value: '#7a7a7a' }
-    - { key: '/org/mate/panel/toplevels/top/background/type', value: 'color' }
-    - { key: '/org/mate/settings-daemon/plugins/media-keys/screensaver', value: 'disabled' }
-    - { key: '/org/mate/terminal/profiles/default/background-type', value: 'transparent' }
-    - { key: '/org/mate/terminal/profiles/default/background-color', value: '#000000000000' }
-    - { key: '/org/mate/terminal/profiles/default/bold-color', value: '#FFFFFFFFFFFF' }
-    - { key: '/org/mate/terminal/profiles/default/font', value: 'DejaVu Sans Mono 16' }
-    - { key: '/org/mate/terminal/profiles/default/visible-name', value: 'AnsibleControlled' }
-    - { key: '/org/mate/terminal/profiles/default/scrollbar-position', value: 'hidden' }
-    - { key: '/org/mate/terminal/global/default-profile', value: 'default' }
-
+    - { key: '/org/mate/desktop/session/required-components/windowmanager', value: "'xmonad'" }
+    - { key: '/org/mate/marco/general/theme', value: "'Adwaita'" }
+    - { key: '/org/mate/panel/toplevels/top/background/color', value: "'#7a7a7a'" }
+    - { key: '/org/mate/panel/toplevels/top/background/opacity', value: '65535' }
+    - { key: '/org/mate/panel/toplevels/top/background/type', value: "'color'" }
+    - { key: '/org/mate/power-manager/sleep-display-ac', value: '300' }
+    - { key: '/org/mate/settings-daemon/plugins/media-keys/screensaver', value: "'disabled'" }
+    - { key: '/org/mate/terminal/global/default-profile', value: "'default'" }
+    - key: '/org/mate/terminal/global/profile-list'
+      value: "['default']"
+    - { key: '/org/mate/terminal/profiles/default/background-color', value: "'#000000000000'" }
+    - { key: '/org/mate/terminal/profiles/default/background-darkness', value: '0.90899470899470902' }
+    - { key: '/org/mate/terminal/profiles/default/background-type', value: "'transparent'" }
+    - { key: '/org/mate/terminal/profiles/default/bold-color', value: "'#FFFFFFFFFFFF'" }
+    - { key: '/org/mate/terminal/profiles/default/default-show-menubar', value: 'false' }
+    - { key: '/org/mate/terminal/profiles/default/font', value: "'DejaVu Sans Mono 16'" }
+    - { key: '/org/mate/terminal/profiles/default/scrollbar-position', value: "'hidden'" }
+    - { key: '/org/mate/terminal/profiles/default/silent-bell', value: 'true' }
+    - { key: '/org/mate/terminal/profiles/default/use-system-font', value: 'false' }
+    - { key: '/org/mate/terminal/profiles/default/visible-name', value: "'AnsibleControlled'" }
