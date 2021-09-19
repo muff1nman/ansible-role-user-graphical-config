@@ -306,7 +306,7 @@ withMate = mateConfig {
       -- hooks, layouts
         layoutHook         = myLayout,
         manageHook         = manageDocks <+> myManageHook <+> manageHook mateConfig,
-        startupHook        = startupHook mateConfig >> setWMName "LG3D" >> spawn "compton --backend glx --vsync opengl-swc -C -f -D 5"
+        startupHook        = startupHook mateConfig >> setWMName "LG3D" >> spawn "picom --backend=glx --vsync -C -f -D 5"
     }
 
 getWellKnownName :: D.Client -> IO ()

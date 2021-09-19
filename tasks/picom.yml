@@ -1,14 +1,14 @@
 ---
 - include_tasks: systemd-user.yml
-- name: Setup compton user service
+- name: Setup picom user service
   copy:
-    src: compton.service
-    dest: "{{ desktop_user_vars.dir }}/.config/systemd/user/compton.service"
+    src: picom.service
+    dest: "{{ desktop_user_vars.dir }}/.config/systemd/user/picom.service"
   notify: [ 'systemd user' ]
 - meta: flush_handlers
-- name: Enable and start compton
+- name: Enable and start picom
   service:
-    name: compton
+    name: picom
     state: started
     enabled: yes
     user: yes

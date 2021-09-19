@@ -10,8 +10,7 @@
   when:
     - '"xmonad" in desktop_wm_list or "matexmonad" in desktop_wm_list'
     - hi_dpi is defined and hi_dpi
-  # TODO use something other than compton?
-- include_tasks: compton.yml
+- include_tasks: picom.yml
   when: '"xmonad" in desktop_wm_list'
 - include_tasks: xinitrc.yml
   when: '"matexmonad" in desktop_wm_list'
