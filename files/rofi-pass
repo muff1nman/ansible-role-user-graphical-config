@@ -1,0 +1,4 @@
+default_do="copyPass"
+clip=clipboard
+notify='true'
+clip_clear=10

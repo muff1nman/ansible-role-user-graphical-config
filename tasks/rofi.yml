@@ -1,0 +1,10 @@
+- name: Create rofi-pass conf directory
+  file:
+    path: "{{desktop_user_vars.dir}}/.config/rofi-pass"
+    state: directory
+- name: setup rofi-pass config
+  copy:
+    src: rofi-pass
+    dest: "{{desktop_user_vars.dir}}/.config/rofi-pass/config"
+    mode: 0644
+

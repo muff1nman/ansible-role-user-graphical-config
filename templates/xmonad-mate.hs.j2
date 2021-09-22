@@ -103,14 +103,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch a terminal
     [ ((modm,               xK_Return), spawn $ XMonad.terminal conf)
  
-    -- launch dmenu
-    , ((modm,               xK_space ), spawn "j4-dmenu-desktop --display-binary --dmenu=\"dmenu -i -h 30 -q -l 25 -p '> ' -fn 'DejaVu Sans Mono'  -nb '#000000' -nf '#f9f9f9' -sb '#272727' -sf '#3FF27A'\"")
+    -- launcher
+    , ((modm,               xK_space ), spawn "rofi -mode run,drun -show drun")
 
     -- launch passmenu
-    , ((modm,               xK_c     ), spawn "{{ passmenu_bin }} -i -h 30 -q -l 25 -p '> ' -fn 'DejaVu Sans Mono' -nb '#000000' -nf '#f9f9f9' -sb '#272727' -sf '#3FF27A'")
- 
-    -- launch gmrun
-    , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
+    , ((modm,               xK_c     ), spawn "rofi-pass")
  
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
