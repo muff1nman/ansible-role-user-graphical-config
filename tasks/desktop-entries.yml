@@ -1,9 +1,0 @@
----
-- name: Create .local/share/applications dir
-  file:
-    path: "{{ desktop_user_vars.dir}}/.local/share/applications"
-    state: directory
-- name: Add files.desktop entry
-  copy:
-    src: files.desktop
-    dest: "{{ desktop_user_vars.dir }}/.local/share/applications/files.desktop"

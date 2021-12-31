@@ -17,7 +17,6 @@
   when: '"matexmonad" in desktop_wm_list'
 - include_tasks: kdei3.yml
   when: '"kdei3" in desktop_wm_list'
-- include_tasks: desktop-entries.yml
 - name: Create .config/dunst dir
   file:
     state: directory
