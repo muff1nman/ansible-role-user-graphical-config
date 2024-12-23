@@ -17,13 +17,8 @@
   when: '"matexmonad" in desktop_wm_list'
 - include_tasks: kdei3.yml
   when: '"kdei3" in desktop_wm_list'
-- name: Create .config/dunst dir
-  file:
-    state: directory
-    path: "{{desktop_user_vars.dir}}/.config/dunst"
-- name: Configure dunstrc
-  copy:
-    src: dunst/dunstrc
-    dest: "{{desktop_user_vars.dir}}/.config/dunst/dunstrc"
+- include_tasks: dunst.yml
+  when: '"xmonad" in desktop_wm_list or "matexmonad" in desktop_wm_list'
 - include_tasks: dconf-settings.yml
+  when: '"xmonad" in desktop_wm_list or "matexmonad" in desktop_wm_list'
 - include_tasks: fonts.yml
