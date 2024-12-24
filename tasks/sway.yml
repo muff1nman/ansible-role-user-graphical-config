@@ -1,0 +1,8 @@
+- name: ensure sway config dir is present
+  file:
+    path: "{{ desktop_user_vars.dir }}/.config/sway"
+    state: directory
+- name: setup sway config
+  copy:
+    src: sway/config
+    dest: "{{ desktop_user_vars.dir }}/.config/sway/config"

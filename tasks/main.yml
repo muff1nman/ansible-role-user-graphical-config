@@ -22,3 +22,7 @@
 - include_tasks: dconf-settings.yml
   when: '"xmonad" in desktop_wm_list or "matexmonad" in desktop_wm_list'
 - include_tasks: fonts.yml
+- debug:
+    var: desktop_wm_list
+- include_tasks: sway.yml
+  when: '"sway" in desktop_wm_list'
