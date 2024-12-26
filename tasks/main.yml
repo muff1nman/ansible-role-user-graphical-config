@@ -27,3 +27,4 @@
     var: desktop_wm_list
 - include_tasks: sway.yml
   when: '"sway" in desktop_wm_list'
+- include_tasks: foot.yml
