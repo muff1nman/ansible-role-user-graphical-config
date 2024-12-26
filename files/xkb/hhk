@@ -1,0 +1,9 @@
+default partial alphanumeric_keys
+xkb_symbols "hhk" {
+       include "us(basic)"
+       include "ctrl(swapcaps)"
+       include "altwin(swap_alt_win)"
+       key <BKSL> {    [ BackSpace, BackSpace  ]       };
+       key <BKSP> {    [ backslash,    bar     ]       };
+       name[Group1]= "English (US, Happy Hacking Keyboard)";
+};

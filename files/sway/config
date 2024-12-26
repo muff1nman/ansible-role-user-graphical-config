@@ -67,7 +67,14 @@ output * bg /usr/share/backgrounds/default.png fill
 # Read `man 5 sway-input` for more information about this section.
 input "type:keyboard" {
     xkb_layout us
-    xkb_options altwin:swap_lalt_lwin,ctrl:nocaps
+}
+
+input "1:1:AT_Translated_Set_2_keyboard" {
+    # The following represents a similar layout to the happy hacking keyboard,
+    # which is essential the following xkb_options plus swapping backspace with
+    # backslash:
+    # xkb_options altwin:swap_lalt_lwin,ctrl:nocaps
+    xkb_layout hhk
 }
 
 ### Key bindings

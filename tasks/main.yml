@@ -1,5 +1,6 @@
 ---
 - include_tasks: rofi.yml
+- include_tasks: xkb.yml
 - include_tasks: light-locker.yml
   when: '"xmonad" in desktop_wm_list'
 - include_tasks: xmonad-conf.yml
