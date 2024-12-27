@@ -90,7 +90,7 @@ input "1:1:AT_Translated_Set_2_keyboard" {
     # Start your launcher
     bindsym $mod+space exec $menu
 
-    bindsym $mod+c exec rofi-pass
+    bindsym $mod+c exec ROFI_PASS_CLIPBOARD_BACKEND=wl-clipboard ROFI_PASS_BACKEND=wtype rofi-pass
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
