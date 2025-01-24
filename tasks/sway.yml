@@ -3,6 +3,6 @@
     path: "{{ desktop_user_vars.dir }}/.config/sway"
     state: directory
 - name: setup sway config
-  copy:
+  template:
     src: sway/config
     dest: "{{ desktop_user_vars.dir }}/.config/sway/config"

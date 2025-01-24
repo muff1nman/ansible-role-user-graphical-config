@@ -4,3 +4,4 @@ terminal_emulator: "mate-terminal"
 bg_zoom: 100
 variant: "hhk"
 passmenu_bin: "passmenu"
+sway_suspend_seconds: 400
