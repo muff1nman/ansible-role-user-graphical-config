@@ -1,0 +1,8 @@
+- name: ensure kitty config dir is present
+  file:
+    path: "{{ desktop_user_vars.dir }}/.config/kitty"
+    state: directory
+- name: setup kitty config
+  copy:
+    src: kitty/kitty.conf
+    dest: "{{ desktop_user_vars.dir }}/.config/kitty/kitty.conf"
